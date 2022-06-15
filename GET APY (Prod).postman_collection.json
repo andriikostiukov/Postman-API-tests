@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "6a5abb3e-dd1f-4666-bbf4-d21d5e8b3727",
+		"name": "GET APY (Prod)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13261340"
+	},
+	"item": [
+		{
+			"name": "Get APY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains token, supply_apy, borrow_apy, supply_reward_apr, reward_apr  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"token\", \"supply_apy\", \"borrow_apy\", \"supply_reward_apr\", \"reward_apr\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"token has all values (11 tokens)\", () => {",
+							"  pm.expect(pm.response.text('token')).to.contain( 'USDC', 'UST', 'FTT', 'SOL', 'ETH', 'BTC', 'RAY', 'USDT', 'SRM', 'mSOL', 'stSOL');",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"supply_apy, borrow_apy, reward_apr are not empty\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData[0,1,2,3,4,5,6,7,8].supply_apy !=='')",
+							"  pm.expect(jsonData[0,1,2,3,4,5,6,7,8].borrow_apy !=='')",
+							"  pm.expect(jsonData[0,1,2,3,4,5,6,7,8].reward_apr !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.everlend.finance/api/v1/apy",
+					"protocol": "https",
+					"host": [
+						"api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"apy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
