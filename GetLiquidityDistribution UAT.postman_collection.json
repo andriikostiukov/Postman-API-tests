@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "52ab7a70-fdb0-49a6-8b18-88bf3d0557db",
+		"name": "GetLiquidityDistribution UAT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13261340"
+	},
+	"item": [
+		{
+			"name": "GetLiquidityDistribution USDT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains money_market, percent  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"money_market\", \"percent\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"percent is not empty\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.percent !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/liquidity_distribution/9NGDi2tZtNmCCp8SVLKNuGjuWAVwNF3Vap5tT8km5er9",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"liquidity_distribution",
+						"9NGDi2tZtNmCCp8SVLKNuGjuWAVwNF3Vap5tT8km5er9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLiquidityDistribution USDC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains money_market, percent  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"money_market\", \"percent\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"percent is not empty\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.percent !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/liquidity_distribution/G6YKv19AeGZ6pUYUwY9D7n4Ry9ESNFa376YqwEkUkhbi",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"liquidity_distribution",
+						"G6YKv19AeGZ6pUYUwY9D7n4Ry9ESNFa376YqwEkUkhbi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetLiquidityDistribution SOL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains money_market, percent  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"money_market\", \"percent\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"percent is not empty\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.percent !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/liquidity_distribution/5gAhHuS82QgoYrkREuWUgVVqUYLdc8SsuiYtHESVvHcZ",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"liquidity_distribution",
+						"5gAhHuS82QgoYrkREuWUgVVqUYLdc8SsuiYtHESVvHcZ"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
