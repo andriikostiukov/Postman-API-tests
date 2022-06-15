@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "65255e48-4832-4d4d-9d55-53285c7f3906",
+		"name": "GET APY (uat)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13261340"
+	},
+	"item": [
+		{
+			"name": "GET APY",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Body contains token, supply_apy, borrow_apy, supply_reward_apr, reward_apr  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"token\", \"supply_apy\", \"borrow_apy\", \"supply_reward_apr\", \"reward_apr\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"token has all values (3 tokens)\", () => {",
+							"  pm.expect(pm.response.text('token')).to.contain( 'USDC', 'SOL', 'USDT');",
+							"});",
+							"",
+							"pm.test(\"check that token sting contain right naming\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData[0].token).to.eql(\"SOL\")",
+							"  pm.expect(jsonData[1].token).to.eql(\"USDC\")",
+							"  pm.expect(jsonData[2].token).to.eql(\"USDT\")",
+							"}); ",
+							"",
+							"",
+							"pm.test(\"supply_apy, borrow_apy, reward_apr are not empty\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData[0,1,2].supply_apy !=='')",
+							"  pm.expect(jsonData[0,1,2].borrow_apy !=='')",
+							"  pm.expect(jsonData[0,1,2].reward_apr !=='')",
+							"}); ",
+							"",
+							"",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/apy",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"apy"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
