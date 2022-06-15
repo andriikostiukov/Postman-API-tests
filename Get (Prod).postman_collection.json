@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "a0d35bd1-5e27-44eb-b3c0-beb81cb283e4",
+		"name": "Get (Prod)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13261340"
+	},
+	"item": [
+		{
+			"name": "GET Prices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Body contains bitcoin, ethereum, ftx-token, larix, msol, port-finance, raydium, solana, terrausd, tether, usd-coin  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include(\"[…]itcoin\", \"ethereum\", \"ftx-token\", \"larix\", \"msol\", \"port-finance\", \"raydium\", \"serum\", \"solana\", \"terrausd\", \"tether\", \"usd-coin\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"token strings are numbers\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.ethereum).to.be.a(\"number\")",
+							"  pm.expect(jsonData.larix).to.be.a(\"number\")",
+							"  pm.expect(jsonData.msol).to.be.a(\"number\")",
+							"  pm.expect(jsonData.raydium).to.be.a(\"number\")",
+							"  pm.expect(jsonData.serum).to.be.a(\"number\")",
+							"  pm.expect(jsonData.solana).to.be.a(\"number\")",
+							"  pm.expect(jsonData.terrausd).to.be.a(\"number\")",
+							"  pm.expect(jsonData.tether).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"",
+							"pm.test(\"ethereum, larix, msol, raydium, serum, terrausd, tether are not empty and null\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.ethereum !==null && jsonData.ethereum !=='')",
+							"  pm.expect(jsonData.larix !==null && jsonData.larix !=='')",
+							"  pm.expect(jsonData.msol !==null && jsonData.msol !=='')",
+							"  pm.expect(jsonData.raydium !==null && jsonData.raydium !=='')",
+							"  pm.expect(jsonData.serum !==null && jsonData.serum !=='')",
+							"  pm.expect(jsonData.solana !==null && jsonData.solana !=='')",
+							"  pm.expect(jsonData.tether !==null && jsonData.tether !=='')",
+							"}); ",
+							"",
+							"pm.test(\"tokens prices are above 0\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(response['ethereum', 'ftx-token', 'larix', 'msol', 'raydium', 'serum', 'terrausd', 'tether', 'solana', 'usd-coin']).to.be.above(0)",
+							"}); ",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.everlend.finance/api/v1/prices?assets=usd-coin,tether,terrausd,solana,msol,[…]itcoin,ethereum,ftx-token,raydium,serum,port-finance,larix",
+					"protocol": "https",
+					"host": [
+						"api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "assets",
+							"value": "usd-coin,tether,terrausd,solana,msol,[…]itcoin,ethereum,ftx-token,raydium,serum,port-finance,larix"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token APY",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get Accounts Stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains count string\",() => {",
+							"  pm.expect(pm.response.text()).to.include( \"count\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"count string is a number\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.count).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"pm.test(\"Count is not empty and null\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.count !==null && jsonData.count !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.everlend.finance/api/v1/stats/accounts",
+					"protocol": "https",
+					"host": [
+						"api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"stats",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Income Stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"",
+							"pm.test(\"Body contains income_amount string\",() => {",
+							"  pm.expect(pm.response.text()).to.include( \"income_amount\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"income_amount is a number\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.income_amount).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"pm.test(\"income_amount is above 0\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(response['income_amount']).to.be.above(0)",
+							"}); ",
+							"",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.everlend.finance/api/v1/stats/income",
+					"protocol": "https",
+					"host": [
+						"api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"stats",
+						"income"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rewards List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.everlend.finance/api/v1/reward/:account",
+					"protocol": "https",
+					"host": [
+						"api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reward",
+						":account"
+					],
+					"variable": [
+						{
+							"key": "account",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
