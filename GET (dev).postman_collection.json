@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "e4a5e97c-e6c3-427a-8422-2f5c94536b08",
+		"name": "GET (dev)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13261340"
+	},
+	"item": [
+		{
+			"name": "GET Prices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Body contains larix, port-finance, solana, tether, usd-coin  strings\",() => {",
+							"  pm.expect(pm.response.text()).to.include( \"larix\", \"port-finance\", \"solana\", \"tether\", \"usd-coin\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"token strings are numbers\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.larix).to.be.a(\"number\")",
+							"  pm.expect(jsonData.solana).to.be.a(\"number\")",
+							"  pm.expect(jsonData.tether).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"",
+							"pm.test(\"tokens prices are above 0\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(response['larix', 'port-finance', 'tether', 'solana', 'usd-coin']).to.be.above(0)",
+							"}); ",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/prices?assets=usd-coin,tether,solana,port-finance,larix",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"prices"
+					],
+					"query": [
+						{
+							"key": "assets",
+							"value": "usd-coin,tether,solana,port-finance,larix"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Accounts Stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains count string\",() => {",
+							"  pm.expect(pm.response.text()).to.include( \"count\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"count string is a number\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.count).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"",
+							"pm.test(\"Count is not empty and null\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.count !==null && jsonData.count !=='')",
+							"}); ",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/stats/accounts",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"stats",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Income Stat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Body contains income_amount string\",() => {",
+							"  pm.expect(pm.response.text()).to.include( \"income_amount\");",
+							"});",
+							"",
+							"const jsonData = pm.response.json();",
+							"pm.test(\"income_amount is a number\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(jsonData.income_amount).to.be.a(\"number\")",
+							"}); ",
+							"",
+							"pm.test(\"income_amount is above 0\", () => {",
+							"    //errors array is empty",
+							"  pm.expect(response['income_amount']).to.be.above(0)",
+							"}); ",
+							"",
+							"",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/stats/income",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"stats",
+						"income"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Rewards List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"console.log(response);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev-api.everlend.finance/api/v1/reward/:account",
+					"protocol": "https",
+					"host": [
+						"dev-api",
+						"everlend",
+						"finance"
+					],
+					"path": [
+						"api",
+						"v1",
+						"reward",
+						":account"
+					],
+					"variable": [
+						{
+							"key": "account",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
